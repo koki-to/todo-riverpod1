@@ -3,7 +3,8 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app/features/auth/data/auth_repository_impl.dart';
-import 'package:todo_app/utils/exception/app_exception.dart';
+import 'package:todo_app/utils/exceptions/app_exception.dart';
+import 'package:todo_app/utils/extensions/firebase_auth_exception.dart';
 
 final signupControllerProvider =
     AutoDisposeAsyncNotifierProvider<SignunController, void>(
@@ -38,7 +39,7 @@ class SignunController extends AutoDisposeAsyncNotifier<void> {
           throw exception;
         }
       } on FirebaseAuthException catch (e) {
-        final exception = AppException(code: e.code, message: e.message);
+        final exception = AppException(code: e.code, message: e.toJapanese);
         throw exception;
       }
     });

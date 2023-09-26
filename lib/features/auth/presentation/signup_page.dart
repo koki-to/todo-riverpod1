@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app/features/auth/application/signin_controller.dart';
+import 'package:todo_app/router/router.gr.dart';
 import 'package:todo_app/utils/widget/loading.dart';
 import 'package:todo_app/utils/widget/sccaffold_messenger_service.dart';
 
@@ -22,10 +23,11 @@ class SignupPage extends ConsumerWidget {
         ref
             .read(scaffoldMessengerServiceProvider)
             .showSnackBar('アカウント作成完了しました。');
-      }, error: (e, s) {
+        context.router.push(const TodoListRoute());
+      }, error: (e, s) async {
         ref.watch(overlayLoadingProvider.notifier).update((state) => false);
         ref.read(scaffoldMessengerServiceProvider).showSnackBar('エラーが発生しました。');
-      }, loading: () {
+      }, loading: () async {
         ref.watch(overlayLoadingProvider.notifier).update((state) => true);
       });
     });
