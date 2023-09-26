@@ -1,6 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo_app/features/auth/application/signin_controller.dart';
+import 'package:todo_app/utils/widget/loading.dart';
+import 'package:todo_app/utils/widget/sccaffold_messenger_service.dart';
 
 @RoutePage()
 class SignupPage extends ConsumerWidget {
@@ -8,6 +11,26 @@ class SignupPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen(signupControllerProvider, (_, state) async {
+      if (state.isLoading) {
+        ref.watch(overlayLoadingProvider.notifier).update((state) => true);
+        return;
+      }
+
+      await state.when(data: (_) async {
+        ref.watch(overlayLoadingProvider.notifier).update((state) => false);
+        ref
+            .read(scaffoldMessengerServiceProvider)
+            .showSnackBar('アカウント作成完了しました。');
+      }, error: (e, s) {
+        ref.watch(overlayLoadingProvider.notifier).update((state) => false);
+        ref.read(scaffoldMessengerServiceProvider).showSnackBar('エラーが発生しました。');
+      }, loading: () {
+        ref.watch(overlayLoadingProvider.notifier).update((state) => true);
+      });
+    });
+
+    final state = ref.watch(signupControllerProvider);
     final emialController = TextEditingController();
     final passwordController = TextEditingController();
     return Scaffold(
@@ -40,8 +63,15 @@ class SignupPage extends ConsumerWidget {
           ),
           const SizedBox(height: 60),
           ElevatedButton(
-            onPressed: () {},
             child: const Text('登録する'),
+            onPressed: state.isLoading
+                ? null
+                : () async {
+                    ref.read(signupControllerProvider.notifier).signin(
+                          email: emialController.text,
+                          password: passwordController.text,
+                        );
+                  },
           ),
         ]),
       ),
