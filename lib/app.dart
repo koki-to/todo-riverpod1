@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app/router/router.dart';
+import 'package:todo_app/utils/widget/sccaffold_messenger_service.dart';
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   MyApp({super.key});
 
   final _appRouter = AppRouter();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       routerConfig: _appRouter.config(),
@@ -25,6 +27,7 @@ class MyApp extends StatelessWidget {
             )),
         useMaterial3: true,
       ),
+      scaffoldMessengerKey: ref.watch(scaffoldMessengerKeyProvider),
     );
   }
 }
