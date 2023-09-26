@@ -35,4 +35,9 @@ class AuthRepositoryImpl implements AuthReposistoy {
     // TODO: implement signOut
     throw UnimplementedError();
   }
+
+  @override
+  Future<void> login({required String email, required String password}) async {
+    await _auth.signInWithEmailAndPassword(email: email, password: password);
+  }
 }
