@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app/features/auth/data/auth_repository.dart';
-import 'package:todo_app/features/auth/domain/firestore_user.dart';
 
 final firebaseAuthProvider = Provider((_) {
   return FirebaseAuth.instance;
@@ -31,9 +30,8 @@ class AuthRepositoryImpl implements AuthReposistoy {
   }
 
   @override
-  Future<void> signOut() {
-    // TODO: implement signOut
-    throw UnimplementedError();
+  Future<void> signOut() async {
+    await _auth.signOut();
   }
 
   @override
