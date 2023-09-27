@@ -10,15 +10,15 @@ final firebaseAuthProvider = Provider((_) {
 final authRepositoryImplProvider = Provider<AuthReposistoy>(
     (ref) => AuthRepositoryImpl(ref.watch(firebaseAuthProvider)));
 
+final authUserProvider = StreamProvider(
+    (ref) => ref.watch(authRepositoryImplProvider).authStateChanges());
+
 class AuthRepositoryImpl implements AuthReposistoy {
   AuthRepositoryImpl(this._auth);
-
   final FirebaseAuth _auth;
+
   @override
-  Stream<FirestoreUser?> authStateChanges() {
-    // TODO: implement authStateChanges
-    throw UnimplementedError();
-  }
+  Stream<User?> authStateChanges() => _auth.authStateChanges();
 
   @override
   Future<String?> signIn({

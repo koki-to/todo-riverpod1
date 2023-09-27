@@ -5,7 +5,8 @@ import 'package:todo_app/router/router.gr.dart';
 class AppRouter extends $AppRouter {
   @override
   List<AutoRoute> get routes => [
-        AutoRoute(page: LoginRoute.page, initial: true),
+        AutoRoute(page: CheckAuthRoute.page, initial: true),
+        AutoRoute(page: LoginRoute.page),
         AutoRoute(
           page: SignupRoute.page,
         ),
