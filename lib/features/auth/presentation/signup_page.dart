@@ -65,7 +65,6 @@ class SignupPage extends ConsumerWidget {
           ),
           const SizedBox(height: 60),
           ElevatedButton(
-            child: const Text('登録する'),
             onPressed: state.isLoading
                 ? null
                 : () async {
@@ -74,6 +73,7 @@ class SignupPage extends ConsumerWidget {
                           password: passwordController.text,
                         );
                   },
+            child: const Text('登録する'),
           ),
         ]),
       ),
