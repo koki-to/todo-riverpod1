@@ -23,7 +23,7 @@ class SignupPage extends ConsumerWidget {
         ref
             .read(scaffoldMessengerServiceProvider)
             .showSnackBar('アカウント作成完了しました。');
-        context.router.push(const TodoListRoute());
+        context.router.replace(const TodoListRoute());
       }, error: (e, s) async {
         ref.watch(overlayLoadingProvider.notifier).update((state) => false);
         ref.read(scaffoldMessengerServiceProvider).showSnackBar('エラーが発生しました。');
