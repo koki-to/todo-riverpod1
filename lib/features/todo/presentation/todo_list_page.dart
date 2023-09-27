@@ -32,21 +32,27 @@ class TodoListPage extends ConsumerWidget {
     final state = ref.watch(logoutControllerProvider);
     return Scaffold(
       appBar: AppBar(
-        title: Text('todolist'),
+        title: const Text('todolist'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text('todoListPage'),
+            const Text('todoListPage'),
+            ElevatedButton(
+              onPressed: () => context.router.push(
+                const TodoCreateRoute(),
+              ),
+              child: const Text('新規登録'),
+            ),
             ElevatedButton(
               onPressed: state.isLoading
                   ? null
                   : () {
                       ref.read(logoutControllerProvider.notifier).logout();
                     },
-              child: Text('ログアウト'),
+              child: const Text('ログアウト'),
             ),
           ],
         ),
