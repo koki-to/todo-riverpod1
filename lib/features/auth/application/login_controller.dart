@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app/features/auth/data/auth_repository_impl.dart';
 import 'package:todo_app/utils/exceptions/app_exception.dart';
@@ -29,7 +30,7 @@ class LoginController extends AutoDisposeAsyncNotifier<void> {
           const exception = AppException(message: 'パスワードが未入力です');
           throw exception;
         }
-        await authRepository.signIn(email: email, password: password);
+        await authRepository.login(email: email, password: password);
       } on FirebaseAuthException catch (e) {
         final exception = AppException(code: e.code, message: e.toJapanese);
         throw exception;

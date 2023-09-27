@@ -7,10 +7,10 @@ import 'package:todo_app/utils/exceptions/app_exception.dart';
 import 'package:todo_app/utils/extensions/firebase_auth_exception.dart';
 
 final signupControllerProvider =
-    AutoDisposeAsyncNotifierProvider<SignunController, void>(
-        SignunController.new);
+    AutoDisposeAsyncNotifierProvider<SigninController, void>(
+        SigninController.new);
 
-class SignunController extends AutoDisposeAsyncNotifier<void> {
+class SigninController extends AutoDisposeAsyncNotifier<void> {
   @override
   FutureOr<void> build() {
     // 初期値処理は不要

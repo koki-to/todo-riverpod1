@@ -17,10 +17,10 @@ class CheckAuthPage extends ConsumerWidget {
           context.router.replace(const TodoListRoute());
           return;
         }
-        context.router.push(const LoginRoute());
+        context.router.replace(const LoginRoute());
         return;
       }, error: (e, s) {
-        context.router.push(const LoginRoute());
+        context.router.replace(const LoginRoute());
         return;
       }, loading: () {
         return const OverlayLoadingWidget();
