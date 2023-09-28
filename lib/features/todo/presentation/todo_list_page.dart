@@ -2,6 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app/features/auth/application/logout_controller.dart';
+import 'package:todo_app/features/todo/application/todo_index_controller.dart';
+import 'package:todo_app/features/todo/domain/todo.dart';
 import 'package:todo_app/router/router.gr.dart';
 import 'package:todo_app/utils/widget/loading.dart';
 import 'package:todo_app/utils/widget/sccaffold_messenger_service.dart';
@@ -12,6 +14,14 @@ class TodoListPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    /// Todoリストの取得
+    final todos = ref.watch(todosProvider).maybeWhen<List<Todo>>(
+        data: (data) {
+          return data.toList();
+        },
+        orElse: () => []);
+
+    /// ログアウト処理
     ref.listen(logoutControllerProvider, (_, state) async {
       if (state.isLoading) {
         ref.watch(overlayLoadingProvider.notifier).update((state) => true);
@@ -39,7 +49,16 @@ class TodoListPage extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text('todoListPage'),
+            ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: todos.length,
+                itemBuilder: (context, index) {
+                  return Text(
+                    todos[index].title,
+                    style: TextStyle(color: Colors.black),
+                  );
+                }),
             ElevatedButton(
               onPressed: () => context.router.push(
                 const TodoCreateRoute(),

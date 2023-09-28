@@ -15,6 +15,7 @@ class TodoRepositoryImpl implements TodoRepository {
   TodoRepositoryImpl(this._firestore);
   final FirebaseFirestore _firestore;
 
+  /// todoの登録
   @override
   Future<bool> createTodo({required Todo todo, required String uid}) async {
     final docRf = await _firestore
@@ -26,9 +27,21 @@ class TodoRepositoryImpl implements TodoRepository {
     return ds.exists;
   }
 
+  /// todoリストの取得
   @override
-  Future<List<Todo>> fetchTodoList({required String userId}) {
-    // TODO: implement fetchTodoList
-    throw UnimplementedError();
+  Stream<List<Todo>> streamTodoList({required String userId}) {
+    final crTodo = _firestore
+        .collection('users')
+        .doc(userId)
+        .collection('todo')
+        .withConverter(
+          fromFirestore: (snapshot, _) => Todo.fromDocumentSnapshot(snapshot),
+          toFirestore: (snapshot, _) {
+            return snapshot.toJson();
+          },
+        );
+    return crTodo
+        .snapshots()
+        .map((qs) => qs.docs.map((qds) => qds.data()).toList());
   }
 }
