@@ -17,6 +17,9 @@ class AuthRepositoryImpl implements AuthReposistoy {
   final FirebaseAuth _auth;
 
   @override
+  User? get currentUser => _auth.currentUser;
+
+  @override
   Stream<User?> authStateChanges() => _auth.authStateChanges();
 
   @override
