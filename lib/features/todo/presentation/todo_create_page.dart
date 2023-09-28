@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app/features/auth/data/auth_repository_impl.dart';
-import 'package:todo_app/features/todo/application/todo_controller.dart';
+import 'package:todo_app/features/todo/application/todo_create_controller.dart';
 import 'package:todo_app/router/router.gr.dart';
 import 'package:todo_app/utils/widget/loading.dart';
 import 'package:todo_app/utils/widget/sccaffold_messenger_service.dart';
