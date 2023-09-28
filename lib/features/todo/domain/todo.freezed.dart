@@ -163,14 +163,15 @@ class __$$_TodoCopyWithImpl<$Res> extends _$TodoCopyWithImpl<$Res, _$_Todo>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Todo implements _Todo {
+class _$_Todo extends _Todo {
   const _$_Todo(
       {@JsonKey(name: 'id') required this.id,
       @JsonKey(name: 'title') required this.title,
       @JsonKey(name: 'description') required this.description,
       @JsonKey(name: 'completed') required this.completed,
       @JsonKey(name: 'createdAt') required this.createdAt,
-      @JsonKey(name: 'updatedAt') required this.updatedAt});
+      @JsonKey(name: 'updatedAt') required this.updatedAt})
+      : super._();
 
   factory _$_Todo.fromJson(Map<String, dynamic> json) => _$$_TodoFromJson(json);
 
@@ -238,7 +239,7 @@ class _$_Todo implements _Todo {
   }
 }
 
-abstract class _Todo implements Todo {
+abstract class _Todo extends Todo {
   const factory _Todo(
       {@JsonKey(name: 'id') required final String id,
       @JsonKey(name: 'title') required final String title,
@@ -246,6 +247,7 @@ abstract class _Todo implements Todo {
       @JsonKey(name: 'completed') required final bool completed,
       @JsonKey(name: 'createdAt') required final dynamic createdAt,
       @JsonKey(name: 'updatedAt') required final dynamic updatedAt}) = _$_Todo;
+  const _Todo._() : super._();
 
   factory _Todo.fromJson(Map<String, dynamic> json) = _$_Todo.fromJson;
 
