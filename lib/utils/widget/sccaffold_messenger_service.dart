@@ -42,7 +42,7 @@ class ScaffordMessengerService {
       SnackBar(
         content: Text(
           message,
-          style: TextStyle(),
+          style: const TextStyle(),
         ),
         backgroundColor: Colors.redAccent,
         behavior: SnackBarBehavior.floating,

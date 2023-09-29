@@ -15,7 +15,7 @@ class LogoutController extends AutoDisposeAsyncNotifier<void> {
   FutureOr<void> build() {}
 
   Future<void> logout() async {
-    final authReposistoy = ref.watch(authRepositoryImplProvider);
+    final authReposistoy = ref.read(authRepositoryImplProvider);
     state = const AsyncLoading();
     state = await AsyncValue.guard(() async {
       try {

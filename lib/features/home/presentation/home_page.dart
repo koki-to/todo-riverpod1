@@ -24,7 +24,7 @@ class HomePage extends ConsumerWidget {
         break;
       case PageType.Profile:
         appBarTitle = 'プロフィール';
-        body = const UserProfile();
+        body = const UserProfilePage();
         break;
     }
     return Scaffold(
