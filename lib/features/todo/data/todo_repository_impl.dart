@@ -55,4 +55,15 @@ class TodoRepositoryImpl implements TodoRepository {
         .doc(todo.id)
         .update(todo.toJson());
   }
+
+  @override
+  Future<void> deleteTodo(
+      {required String todoId, required String userId}) async {
+    await _firestore
+        .collection('users')
+        .doc(userId)
+        .collection('todo')
+        .doc(todoId)
+        .delete();
+  }
 }
