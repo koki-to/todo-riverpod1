@@ -29,7 +29,7 @@ class TodoUpdateController extends AutoDisposeAsyncNotifier {
         }
 
         await todoRepository.updateTodo(todo: todo, userId: userId);
-      } on AppException catch (_) {
+      } on AppException {
         rethrow;
       }
     });
