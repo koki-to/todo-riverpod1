@@ -20,7 +20,7 @@ class TodoCreateController extends AutoDisposeAsyncNotifier {
     required String title,
     required String description,
   }) async {
-    final firestore = ref.watch(todoRepositoryImplProvider);
+    final todoRepository = ref.read(todoRepositoryImplProvider);
     state = const AsyncLoading();
     state = await AsyncValue.guard(() async {
       try {
@@ -47,7 +47,7 @@ class TodoCreateController extends AutoDisposeAsyncNotifier {
           updatedAt: Timestamp.now(),
         );
 
-        final result = await firestore.createTodo(todo: todo, uid: uid);
+        final result = await todoRepository.createTodo(todo: todo, uid: uid);
         if (!result) {
           const exception =
               AppException(message: '登録に失敗しました。前の画面に戻り再度登録してください。');

@@ -77,7 +77,9 @@ class LoginPage extends ConsumerWidget {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () => context.router.push(const SignupRoute()),
+              onPressed: state.isLoading
+                  ? null
+                  : () => context.router.push(const SignupRoute()),
               child: const Text('新規登録'),
             ),
           ],
