@@ -19,7 +19,7 @@ class LoginPage extends ConsumerWidget {
       }
       await state.when(data: (_) async {
         ref.watch(overlayLoadingProvider.notifier).update((state) => false);
-        context.router.replace(const TodoListRoute());
+        context.router.replace(const HomeRoute());
       }, error: (e, s) async {
         ref.watch(overlayLoadingProvider.notifier).update((state) => false);
         ref.read(scaffoldMessengerServiceProvider).showSnackBar('エラーが発生しました。');

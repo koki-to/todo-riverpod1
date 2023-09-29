@@ -14,7 +14,7 @@ class CheckAuthPage extends ConsumerWidget {
     return Scaffold(
       body: ref.watch(authUserProvider).when(data: (data) {
         if (data != null) {
-          context.router.replace(const TodoListRoute());
+          context.router.replace(const HomeRoute());
           return;
         }
         context.router.replace(const LoginRoute());

@@ -40,41 +40,41 @@ class TodoListPage extends ConsumerWidget {
     });
 
     final state = ref.watch(logoutControllerProvider);
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('todolist'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: todos.length,
-                itemBuilder: (context, index) {
-                  return Text(
-                    todos[index].title,
-                    style: TextStyle(color: Colors.black),
-                  );
-                }),
-            ElevatedButton(
-              onPressed: () => context.router.push(
-                const TodoCreateRoute(),
-              ),
-              child: const Text('新規登録'),
+
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: todos.length,
+              itemBuilder: (context, index) {
+                final todo = todos[index];
+                return Card(
+                  child: ListTile(
+                    title: Text(todo.title),
+                    subtitle: Text(todo.description),
+                    tileColor: Colors.amber[50],
+                  ),
+                );
+              }),
+          ElevatedButton(
+            onPressed: () => context.router.push(
+              const TodoCreateRoute(),
             ),
-            ElevatedButton(
-              onPressed: state.isLoading
-                  ? null
-                  : () {
-                      ref.read(logoutControllerProvider.notifier).logout();
-                    },
-              child: const Text('ログアウト'),
-            ),
-          ],
-        ),
+            child: const Text('新規登録'),
+          ),
+          ElevatedButton(
+            onPressed: state.isLoading
+                ? null
+                : () {
+                    ref.read(logoutControllerProvider.notifier).logout();
+                  },
+            child: const Text('ログアウト'),
+          ),
+        ],
       ),
     );
   }
