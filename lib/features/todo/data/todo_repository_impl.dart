@@ -44,4 +44,15 @@ class TodoRepositoryImpl implements TodoRepository {
         .snapshots()
         .map((qs) => qs.docs.map((qds) => qds.data()).toList());
   }
+
+  /// todoの更新
+  @override
+  Future<void> updateTodo({required Todo todo, required String userId}) async {
+    return _firestore
+        .collection('users')
+        .doc(userId)
+        .collection('todo')
+        .doc(todo.id)
+        .update(todo.toJson());
+  }
 }
