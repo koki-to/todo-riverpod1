@@ -1,0 +1,1 @@
+const themePrefsKey = 'themeModeKey';

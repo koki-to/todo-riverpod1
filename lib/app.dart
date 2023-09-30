@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app/router/router.dart';
+import 'package:todo_app/utils/theme/app_theme.dart';
+import 'package:todo_app/utils/theme/theme_data.dart';
 import 'package:todo_app/utils/widget/sccaffold_messenger_service.dart';
 
 class MyApp extends ConsumerWidget {
@@ -14,19 +16,9 @@ class MyApp extends ConsumerWidget {
       debugShowCheckedModeBanner: false,
       routerConfig: _appRouter.config(),
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        appBarTheme: const AppBarTheme(
-            backgroundColor: Colors.blueAccent,
-            titleTextStyle: TextStyle(
-              color: Colors.white,
-              fontSize: 20.0,
-            ),
-            iconTheme: IconThemeData(
-              color: Colors.white,
-            )),
-        useMaterial3: true,
-      ),
+      theme: lightThemeData,
+      darkTheme: dartThemeData,
+      themeMode: ref.watch(appThemeProvider),
       scaffoldMessengerKey: ref.watch(scaffoldMessengerKeyProvider),
     );
   }
