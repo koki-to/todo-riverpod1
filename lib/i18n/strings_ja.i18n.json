@@ -1,0 +1,27 @@
+{
+    "mainScreen": {
+        "title": "日本語のタイトル",
+        "counter": {
+        "one": "ボタンを$n回押しました。",
+        "other": "ボタンを$n回押しました。"
+        },
+        "tapMe": "押してね"
+    },
+    "homePage": {
+        "title": "Todoリスト",
+        "bottomBar": {
+            "todo": "todo",
+            "profile": "プロフィール"
+        },
+        "drawer": {
+            "themeModeLight": "ライトモードに変更",
+            "themeModeDart": "ダークモードに変更",
+            "appLocale": "Switch to English"
+        }
+    },
+    "locales(map)": {
+        "en": "英語",
+        "de": "ドイツ語",
+        "ja": "日本語"
+    }
+}
