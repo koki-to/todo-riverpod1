@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app/features/auth/presentation/user_profile.dart';
 import 'package:todo_app/features/home/application/bottom_navigation_controller.dart';
+import 'package:todo_app/features/home/presentation/widget/custom_drawer.dart';
 import 'package:todo_app/features/todo/presentation/todo_list_page.dart';
 import 'package:todo_app/features/home/presentation/widget/custom_bottom_navigation_bar.dart';
 
@@ -31,6 +32,7 @@ class HomePage extends ConsumerWidget {
       appBar: AppBar(
         title: Text(appBarTitle),
       ),
+      drawer: const CustomDrawer(),
       body: body,
       bottomNavigationBar: const CustomBottomNavigationBar(),
     );

@@ -9,8 +9,6 @@ class CustomBottomNavigationBar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final currentPage = ref.watch(bottomNavigationNotifierProvider);
     return BottomNavigationBar(
-      backgroundColor: Colors.blueAccent,
-      selectedItemColor: Colors.white,
       currentIndex: PageType.values.indexOf(currentPage),
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
