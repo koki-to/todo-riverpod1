@@ -6,6 +6,7 @@ import 'package:todo_app/features/home/application/bottom_navigation_controller.
 import 'package:todo_app/features/home/presentation/widget/custom_drawer.dart';
 import 'package:todo_app/features/todo/presentation/todo_list_page.dart';
 import 'package:todo_app/features/home/presentation/widget/custom_bottom_navigation_bar.dart';
+import 'package:todo_app/i18n/strings.g.dart';
 
 @RoutePage()
 class HomePage extends ConsumerWidget {
@@ -13,6 +14,7 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final t = Translations.of(context);
     final currentPage = ref.watch(bottomNavigationNotifierProvider);
 
     String appBarTitle;
@@ -20,11 +22,11 @@ class HomePage extends ConsumerWidget {
 
     switch (currentPage) {
       case PageType.Todo:
-        appBarTitle = 'Todoリスト';
+        appBarTitle = t.homePage.title;
         body = const TodoListPage();
         break;
       case PageType.Profile:
-        appBarTitle = 'プロフィール';
+        appBarTitle = t.homePage.bottomBar.profile;
         body = const UserProfilePage();
         break;
     }

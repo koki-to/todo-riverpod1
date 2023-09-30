@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo_app/i18n/strings.g.dart';
+import 'package:todo_app/utils/locale_provider.dart';
 import 'package:todo_app/utils/theme/app_theme.dart';
 
 class CustomDrawer extends ConsumerWidget {
@@ -8,13 +10,14 @@ class CustomDrawer extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final appTheme = ref.watch(appThemeProvider);
+    final activeLocale = ref.watch(localeProvider);
     return Drawer(
       child: ListView(
         children: [
           appTheme == ThemeMode.light
               ? ListTile(
                   leading: const Icon(Icons.dark_mode),
-                  title: const Text('ダークモード'),
+                  title: Text(t.homePage.drawer.themeModeDart),
                   onTap: () {
                     ref
                         .read(appThemeProvider.notifier)
@@ -23,13 +26,32 @@ class CustomDrawer extends ConsumerWidget {
                 )
               : ListTile(
                   leading: const Icon(Icons.sunny_snowing),
-                  title: const Text('ライトモード'),
+                  title: Text(t.homePage.drawer.themeModeLight),
                   onTap: () {
                     ref
                         .read(appThemeProvider.notifier)
                         .changeTheme(ThemeMode.light);
                   },
+                ),
+          activeLocale == AppLocale.ja
+              ? ListTile(
+                  leading: const Icon(Icons.language),
+                  title: Text(t.homePage.drawer.appLocale),
+                  onTap: () {
+                    ref
+                        .read(localeProvider.notifier)
+                        .changeLocale(AppLocale.en);
+                  },
                 )
+              : ListTile(
+                  leading: const Icon(Icons.language),
+                  title: Text(t.homePage.drawer.appLocale),
+                  onTap: () {
+                    ref
+                        .read(localeProvider.notifier)
+                        .changeLocale(AppLocale.ja);
+                  },
+                ),
         ],
       ),
     );
