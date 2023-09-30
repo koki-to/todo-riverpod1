@@ -21,7 +21,7 @@ class TodoCreatePage extends ConsumerWidget {
       await state.when(data: (_) {
         ref.watch(overlayLoadingProvider.notifier).update((state) => false);
         ref.read(scaffoldMessengerServiceProvider).showSnackBar('Todoを登録しました');
-        context.router.replace(const TodoListRoute());
+        context.router.replaceAll([const HomeRoute()]);
       }, error: (e, s) {
         ref.watch(overlayLoadingProvider.notifier).update((state) => false);
         ref.read(scaffoldMessengerServiceProvider).showSnackBar('エラーが発生しました。');

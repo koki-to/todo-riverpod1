@@ -28,7 +28,7 @@ class TodoEditPage extends ConsumerWidget {
           data: (data) async {
             ref.watch(overlayLoadingProvider.notifier).update((state) => false);
             ref.read(scaffoldMessengerServiceProvider).showSnackBar('更新しました');
-            context.router.replace(const HomeRoute());
+            context.router.replaceAll([const HomeRoute()]);
           },
           error: (e, s) async {
             ref.watch(overlayLoadingProvider.notifier).update((state) => false);
@@ -51,7 +51,7 @@ class TodoEditPage extends ConsumerWidget {
           data: (data) async {
             ref.watch(overlayLoadingProvider.notifier).update((state) => false);
             ref.read(scaffoldMessengerServiceProvider).showSnackBar('削除しました');
-            context.router.replace(const HomeRoute());
+            context.router.replaceAll([const HomeRoute()]);
           },
           error: (e, s) async {
             ref.watch(overlayLoadingProvider.notifier).update((state) => false);
