@@ -4,10 +4,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_app/app.dart';
 import 'package:todo_app/firebase_options.dart';
+import 'package:todo_app/i18n/strings.g.dart';
 import 'package:todo_app/utils/shared_preferences_provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  LocaleSettings.useDeviceLocale();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -18,7 +20,7 @@ Future<void> main() async {
           await SharedPreferences.getInstance(),
         ),
       ],
-      child: MyApp(),
+      child: TranslationProvider(child: App()),
     ),
   );
 }
