@@ -1,12 +1,12 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo_app/i18n/strings.g.dart';
+import '../i18n/strings.g.dart';
 
 final localeProvider =
     NotifierProvider<LocaleNotifier, AppLocale>(LocaleNotifier.new);
 
 class LocaleNotifier extends Notifier<AppLocale> {
   @override
-  build() {
+  AppLocale build() {
     return LocaleSettings.currentLocale;
   }
 

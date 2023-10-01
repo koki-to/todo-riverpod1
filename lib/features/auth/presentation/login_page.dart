@@ -1,10 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo_app/features/auth/application/login_controller.dart';
-import 'package:todo_app/router/router.gr.dart';
-import 'package:todo_app/utils/widget/loading.dart';
-import 'package:todo_app/utils/widget/sccaffold_messenger_service.dart';
+
+import '../../../router/router.gr.dart';
+import '../../../utils/widget/loading.dart';
+import '../../../utils/widget/sccaffold_messenger_service.dart';
+import '../application/login_controller.dart';
 
 @RoutePage()
 class LoginPage extends ConsumerWidget {
@@ -17,15 +18,21 @@ class LoginPage extends ConsumerWidget {
         ref.watch(overlayLoadingProvider.notifier).update((state) => true);
         return;
       }
-      await state.when(data: (_) async {
-        ref.watch(overlayLoadingProvider.notifier).update((state) => false);
-        context.router.replace(const HomeRoute());
-      }, error: (e, s) async {
-        ref.watch(overlayLoadingProvider.notifier).update((state) => false);
-        ref.read(scaffoldMessengerServiceProvider).showSnackBar('エラーが発生しました。');
-      }, loading: () async {
-        ref.watch(overlayLoadingProvider.notifier).update((state) => true);
-      });
+      await state.when(
+        data: (_) async {
+          ref.watch(overlayLoadingProvider.notifier).update((state) => false);
+          await context.router.replace(const HomeRoute());
+        },
+        error: (e, s) async {
+          ref.watch(overlayLoadingProvider.notifier).update((state) => false);
+          ref
+              .read(scaffoldMessengerServiceProvider)
+              .showSnackBar('エラーが発生しました。');
+        },
+        loading: () async {
+          ref.watch(overlayLoadingProvider.notifier).update((state) => true);
+        },
+      );
     });
 
     final state = ref.watch(loginControllerProvider);
@@ -40,10 +47,9 @@ class LoginPage extends ConsumerWidget {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8),
               child: TextFormField(
                 controller: emialController,
                 onChanged: (value) {},
@@ -54,7 +60,7 @@ class LoginPage extends ConsumerWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8),
               child: TextFormField(
                 controller: passwordController,
                 onChanged: (value) {},
@@ -68,11 +74,11 @@ class LoginPage extends ConsumerWidget {
             ElevatedButton(
               onPressed: state.isLoading
                   ? null
-                  : () async => await ref
-                      .read(loginControllerProvider.notifier)
-                      .login(
-                          email: emialController.text,
-                          password: passwordController.text),
+                  : () async =>
+                      ref.read(loginControllerProvider.notifier).login(
+                            email: emialController.text,
+                            password: passwordController.text,
+                          ),
               child: const Text('ログインする'),
             ),
             const SizedBox(height: 20),

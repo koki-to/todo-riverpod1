@@ -1,7 +1,10 @@
+// ignore_for_file: flutter_style_todos
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo_app/features/todo/data/todo_repository.dart';
-import 'package:todo_app/features/todo/domain/todo.dart';
+
+import '../domain/todo.dart';
+import 'todo_repository.dart';
 
 final firebaseFirestoreProvider = Provider((_) {
   return FirebaseFirestore.instance;
@@ -56,9 +59,12 @@ class TodoRepositoryImpl implements TodoRepository {
         .update(todo.toJson());
   }
 
+  /// todoの削除
   @override
-  Future<void> deleteTodo(
-      {required String todoId, required String userId}) async {
+  Future<void> deleteTodo({
+    required String todoId,
+    required String userId,
+  }) async {
     await _firestore
         .collection('users')
         .doc(userId)

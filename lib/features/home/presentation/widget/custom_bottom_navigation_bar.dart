@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo_app/features/home/application/bottom_navigation_controller.dart';
+import '../../application/bottom_navigation_controller.dart';
 
 class CustomBottomNavigationBar extends ConsumerWidget {
   const CustomBottomNavigationBar({super.key});
@@ -12,15 +12,17 @@ class CustomBottomNavigationBar extends ConsumerWidget {
       currentIndex: PageType.values.indexOf(currentPage),
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-            icon: Icon(
-              Icons.toc,
-            ),
-            label: 'todo'),
+          icon: Icon(
+            Icons.toc,
+          ),
+          label: 'todo',
+        ),
         BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person,
-            ),
-            label: 'プロフィール'),
+          icon: Icon(
+            Icons.person,
+          ),
+          label: 'プロフィール',
+        ),
       ],
       onTap: (int index) {
         final pageType = PageType.values[index];

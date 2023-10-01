@@ -17,7 +17,7 @@ final lightThemeData = ThemeData.from(
     backgroundColor: Colors.blueAccent,
     titleTextStyle: TextStyle(
       color: Colors.white,
-      fontSize: 20.0,
+      fontSize: 20,
     ),
     iconTheme: IconThemeData(
       color: Colors.white,
@@ -47,7 +47,7 @@ final dartThemeData = ThemeData.from(
     backgroundColor: Colors.grey,
     titleTextStyle: TextStyle(
       color: Colors.white,
-      fontSize: 20.0,
+      fontSize: 20,
     ),
     iconTheme: IconThemeData(
       color: Colors.white,

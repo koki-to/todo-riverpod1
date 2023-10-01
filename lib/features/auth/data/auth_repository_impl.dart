@@ -1,16 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo_app/features/auth/data/auth_repository.dart';
+import 'auth_repository.dart';
 
 final firebaseAuthProvider = Provider((_) {
   return FirebaseAuth.instance;
 });
 
 final authRepositoryImplProvider = Provider<AuthReposistoy>(
-    (ref) => AuthRepositoryImpl(ref.watch(firebaseAuthProvider)));
+  (ref) => AuthRepositoryImpl(ref.watch(firebaseAuthProvider)),
+);
 
 final authUserProvider = StreamProvider(
-    (ref) => ref.watch(authRepositoryImplProvider).authStateChanges());
+  (ref) => ref.watch(authRepositoryImplProvider).authStateChanges(),
+);
 
 class AuthRepositoryImpl implements AuthReposistoy {
   AuthRepositoryImpl(this._auth);
@@ -28,7 +30,9 @@ class AuthRepositoryImpl implements AuthReposistoy {
     required String password,
   }) async {
     final userCredential = await _auth.createUserWithEmailAndPassword(
-        email: email, password: password);
+      email: email,
+      password: password,
+    );
     return userCredential.user!.uid;
   }
 

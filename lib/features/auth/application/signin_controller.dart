@@ -2,13 +2,15 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo_app/features/auth/data/auth_repository_impl.dart';
-import 'package:todo_app/utils/exceptions/app_exception.dart';
-import 'package:todo_app/utils/extensions/firebase_auth_exception.dart';
+
+import '../../../utils/exceptions/app_exception.dart';
+import '../../../utils/extensions/firebase_auth_exception.dart';
+import '../data/auth_repository_impl.dart';
 
 final signupControllerProvider =
     AutoDisposeAsyncNotifierProvider<SigninController, void>(
-        SigninController.new);
+  SigninController.new,
+);
 
 class SigninController extends AutoDisposeAsyncNotifier<void> {
   @override

@@ -2,18 +2,20 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo_app/features/todo/data/todo_repository_impl.dart';
-import 'package:todo_app/features/todo/domain/todo.dart';
-import 'package:todo_app/utils/exceptions/app_exception.dart';
 import 'package:uuid/uuid.dart';
+
+import '../../../utils/exceptions/app_exception.dart';
+import '../data/todo_repository_impl.dart';
+import '../domain/todo.dart';
 
 final todoCreateControllerProvider =
     AutoDisposeAsyncNotifierProvider<TodoCreateController, void>(
-        TodoCreateController.new);
+  TodoCreateController.new,
+);
 
-class TodoCreateController extends AutoDisposeAsyncNotifier {
+class TodoCreateController extends AutoDisposeAsyncNotifier<void> {
   @override
-  FutureOr build() {}
+  FutureOr<void> build() {}
 
   Future<void> createTodo({
     required String uid,

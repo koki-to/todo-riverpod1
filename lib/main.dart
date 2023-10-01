@@ -4,10 +4,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:todo_app/app.dart';
-import 'package:todo_app/firebase_options.dart';
-import 'package:todo_app/i18n/strings.g.dart';
-import 'package:todo_app/utils/shared_preferences_provider.dart';
+import 'app.dart';
+import 'firebase_options.dart';
+import 'i18n/strings.g.dart';
+import 'utils/shared_preferences_provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

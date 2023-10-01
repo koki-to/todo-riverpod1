@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo_app/utils/constants/strings.dart';
-import 'package:todo_app/utils/shared_preferences_provider.dart';
+import '../constants/strings.dart';
+import '../shared_preferences_provider.dart';
 
 final appThemeProvider =
-    StateNotifierProvider<AppTheme, ThemeMode>((ref) => AppTheme(ref));
+    StateNotifierProvider<AppTheme, ThemeMode>(AppTheme.new);
 
 class AppTheme extends StateNotifier<ThemeMode> {
   AppTheme(this._ref) : super(ThemeMode.system) {

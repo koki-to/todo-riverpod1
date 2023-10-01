@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo_app/i18n/strings.g.dart';
-import 'package:todo_app/router/router.dart';
-import 'package:todo_app/utils/locale_provider.dart';
-import 'package:todo_app/utils/theme/app_theme.dart';
-import 'package:todo_app/utils/theme/theme_data.dart';
-import 'package:todo_app/utils/widget/sccaffold_messenger_service.dart';
+import 'i18n/strings.g.dart';
+import 'router/router.dart';
+import 'utils/locale_provider.dart';
+import 'utils/theme/app_theme.dart';
+import 'utils/theme/theme_data.dart';
+import 'utils/widget/sccaffold_messenger_service.dart';
 
 class App extends ConsumerWidget {
   App({super.key});

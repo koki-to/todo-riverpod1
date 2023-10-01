@@ -1,24 +1,26 @@
 import 'dart:async';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo_app/features/todo/data/todo_repository_impl.dart';
-import 'package:todo_app/utils/exceptions/app_exception.dart';
+import '../../../utils/exceptions/app_exception.dart';
+import '../data/todo_repository_impl.dart';
 
 final todoDeleteControllerProvider =
     AutoDisposeAsyncNotifierProvider<TodoDeleteController, void>(
-        TodoDeleteController.new);
+  TodoDeleteController.new,
+);
 
-class TodoDeleteController extends AutoDisposeAsyncNotifier {
+class TodoDeleteController extends AutoDisposeAsyncNotifier<void> {
   @override
-  FutureOr build() {}
+  FutureOr<void> build() {}
 
-  Future<void> deleteTodo(
-      {required String todoId, required String userId}) async {
+  Future<void> deleteTodo({
+    required String todoId,
+    required String userId,
+  }) async {
     final todoRepository = ref.read(todoRepositoryImplProvider);
     state = const AsyncLoading();
     state = await AsyncValue.guard(() async {
       try {
-        todoRepository.deleteTodo(
+        await todoRepository.deleteTodo(
           todoId: todoId,
           userId: userId,
         );

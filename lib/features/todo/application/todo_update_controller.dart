@@ -1,17 +1,18 @@
 import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo_app/features/todo/data/todo_repository_impl.dart';
-import 'package:todo_app/features/todo/domain/todo.dart';
-import 'package:todo_app/utils/exceptions/app_exception.dart';
+import '../../../utils/exceptions/app_exception.dart';
+import '../data/todo_repository_impl.dart';
+import '../domain/todo.dart';
 
 final todoUpdateControllerProvider =
     AutoDisposeAsyncNotifierProvider<TodoUpdateController, void>(
-        TodoUpdateController.new);
+  TodoUpdateController.new,
+);
 
-class TodoUpdateController extends AutoDisposeAsyncNotifier {
+class TodoUpdateController extends AutoDisposeAsyncNotifier<void> {
   @override
-  FutureOr build() {}
+  FutureOr<void> build() {}
 
   Future<void> updateTodo({required Todo todo, required String userId}) async {
     final todoRepository = ref.read(todoRepositoryImplProvider);

@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 enum PageType {
@@ -7,7 +9,8 @@ enum PageType {
 
 final bottomNavigationNotifierProvider =
     NotifierProvider<BottomNavigationNotifier, PageType>(
-        BottomNavigationNotifier.new);
+  BottomNavigationNotifier.new,
+);
 
 class BottomNavigationNotifier extends Notifier<PageType> {
   @override

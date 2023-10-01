@@ -1,12 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo_app/features/auth/presentation/user_profile.dart';
-import 'package:todo_app/features/home/application/bottom_navigation_controller.dart';
-import 'package:todo_app/features/home/presentation/widget/custom_drawer.dart';
-import 'package:todo_app/features/todo/presentation/todo_list_page.dart';
-import 'package:todo_app/features/home/presentation/widget/custom_bottom_navigation_bar.dart';
-import 'package:todo_app/i18n/strings.g.dart';
+
+import '../../../i18n/strings.g.dart';
+import '../../auth/presentation/user_profile.dart';
+import '../../todo/presentation/todo_list_page.dart';
+import '../application/bottom_navigation_controller.dart';
+import 'widget/custom_bottom_navigation_bar.dart';
+import 'widget/custom_drawer.dart';
 
 @RoutePage()
 class HomePage extends ConsumerWidget {
@@ -24,11 +25,9 @@ class HomePage extends ConsumerWidget {
       case PageType.Todo:
         appBarTitle = t.homePage.title;
         body = const TodoListPage();
-        break;
       case PageType.Profile:
         appBarTitle = t.homePage.bottomBar.profile;
         body = const UserProfilePage();
-        break;
     }
     return Scaffold(
       appBar: AppBar(
