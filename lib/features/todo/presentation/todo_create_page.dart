@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app/features/auth/data/auth_repository_impl.dart';
 import 'package:todo_app/features/todo/application/todo_create_controller.dart';
 import 'package:todo_app/router/router.gr.dart';
+import 'package:todo_app/utils/analytics_provider.dart';
 import 'package:todo_app/utils/widget/loading.dart';
 import 'package:todo_app/utils/widget/sccaffold_messenger_service.dart';
 
@@ -32,6 +33,7 @@ class TodoCreatePage extends ConsumerWidget {
 
     final state = ref.watch(todoCreateControllerProvider);
     final auth = ref.watch(firebaseAuthProvider).currentUser;
+    final analytics = ref.read(analyticsServiceProvider);
     final titleController = TextEditingController();
     final descriptionController = TextEditingController();
     return Scaffold(
@@ -69,12 +71,16 @@ class TodoCreatePage extends ConsumerWidget {
           ElevatedButton(
             onPressed: state.isLoading
                 ? null
-                : () =>
-                    ref.read(todoCreateControllerProvider.notifier).createTodo(
+                : () async {
+                    await ref
+                        .read(todoCreateControllerProvider.notifier)
+                        .createTodo(
                           uid: auth!.uid,
                           title: titleController.text,
                           description: descriptionController.text,
-                        ),
+                        );
+                    analytics.createTodo(userId: auth.uid);
+                  },
             child: const Text('登録'),
           )
         ],
